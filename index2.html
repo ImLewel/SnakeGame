@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<title>Cour✨gym✨ test page</title>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h3>Welcome to the snake game!</h3>
+    </header>
+        <nav class="transition">
+            <ul>
+                <li><h2>Choose something:</h2></li>
+                <li><button id="homeButton"><a href="index.html">Home</a></button></li>
+                <li><button id="testButton"><a href="index2.html">Test</a></button></li>
+            </ul>
+        </nav>
+        <main class="transition">
+            <div id="canvasWrapper">
+                <canvas id="game-canvas" width="384" height="384"></canvas>
+                <div id="dataField">
+                    <span style="font-weight: bold;" id="score" >Score</span>
+                    <span style="font-weight: bold;" id="record">Record</span>
+                    <span style="font-weight: bold;">Choose color of snake:</span>
+                    <div id="buttonWrapper">
+                        <button class="colorButton" style="background-color:red; height:60px; width: 80px;">Red</button>
+                        <button class="colorButton" style="background-color:yellow; height:60px; width: 80px;">Yellow</button>
+                        <button class="colorButton" style="background-color:blue; height:60px; width: 80px;">Blue</button>
+                        <button class="colorButton" style="background-color:pink; height:60px; width: 80px;">Pink</button>
+                        <button class="colorButton" style="background-color:gray; height:60px; width: 80px;">Gray</button>
+                        <button class="colorButton" style="background-color:green; height:60px; width: 80px;">Green</button>
+                        <button class="colorButton" style="background-color:purple; height:60px; width: 80px;">Purple</button>
+                        <button class="colorButton" style="background-color:brown; height:60px; width: 80px;">Brown</button>
+                        <button class="headOrBodyColor" id="head" style="background-color:floralwhite; height:60px; width: 80px;">Head</button>
+                        <button class="headOrBodyColor" id="body" style="background-color:floralwhite; height:60px; width: 80px;">Body</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <h3>Made by Cour✨gym✨ team</h3>
+        </footer>
+    <script src="app.js"></script>
+</body>

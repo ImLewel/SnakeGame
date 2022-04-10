@@ -1,0 +1,168 @@
+body { /*Обьединяет все блоки*/
+  position:relative;
+  display:block;
+  width: 100vw;
+  height: 100vh;
+  font-size: 1vw;
+  font-family: Helvetica;
+  margin:0px;
+}
+
+header { /*Шапка*/
+  position:absolute;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  top:0;
+  width: 100%;
+  height: 5%;
+  background-color: darkgreen;
+  color:white;
+}
+
+footer { /*Подвал*/
+  position: absolute;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  bottom: 0%;
+  width: 100%;
+  height: 5%;
+  background-color: darkgreen;
+  color: white;
+}
+
+main { /*Основной блок*/
+  float:right;
+  position:absolute;
+  top:5%;
+  right:0px;
+  width: 95%;
+  height: 90%;
+  background-color: lightgray;
+}
+
+nav { /*Скрытый nav*/
+  float:left;
+  position:absolute;
+  top:5%;
+  width: 5%;
+  height: 90%;
+  background-color: forestgreen; 
+}
+
+nav:hover { /*Раскрытый nav*/
+  width: 20%;
+  height: 90%;
+  background-color: #3e8e41;
+}
+
+nav ul{ /*параметры целого списка nav*/
+  opacity:0;
+  padding:0;
+  color:white;
+}
+
+nav:hover ul { /*параметры елемента списка в nav при открытии nav*/
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  list-style: none;
+  height:inherit;
+  line-height: 250%;
+}
+
+nav li { /*параметры елемента списка в nav*/
+  padding-bottom: 2%;
+}
+
+.transition { /*плавный переход*/
+  transition: all 1s ease-out;
+}
+
+nav button { /*кнопка (стандартные настройки, если изменять то через .класс .button)*/
+  height: 100%;
+  width: 100%;
+  background-color: #4CAF50;
+  border: 1px solid green;
+  color: white;
+  font-size: inherit;
+  font-weight: bold;
+  text-align: center;
+  overflow-wrap: break-word;
+  cursor: pointer;
+}
+
+button a { /*тег ссылки покрывает почти всю площадь кнопки*/
+   display: inline-block;
+   width: inherit;
+   height: inherit;
+   line-height: 200%;
+}
+
+nav button:hover {/*наведение на кнопку*/
+  background-color: #3e8e41;
+}
+
+nav:hover ~ main { /*смена размера основной части при раскрытии левой панели*/
+  width: 80%;
+  height: 90%;
+  background-color: lightgray;
+}
+#canvasWrapper {
+  display:flex;
+  flex-direction:column;
+}
+
+#buttonWrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 85px);
+  grid-template-rows: repeat(3, 65px);
+}
+
+#buttonWrapper > .colorButton{
+  font-weight: bold;
+  border:solid;
+  border-width: 2px;
+  border-color: gray;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#buttonWrapper > .headOrBodyColor{
+  font-weight: bold;
+  border:solid;
+  border-width: 2px;
+  border-color: gray;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#score{}
+
+#dataField{
+  display:flex;
+  flex-direction:column;
+}
+
+#game-canvas {
+  width:384px;
+  height:384px;
+  border: solid;
+  border-width: 2px;
+  border-color: gray;
+  border-radius: 5px;
+  background-color : white;
+}
+
+a { /*убирает подчеркивание*/
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 { /*не будет отступов лишних*/
+  margin-top:0;
+  margin-bottom:0;
+}
+
