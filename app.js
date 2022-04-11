@@ -1,20 +1,22 @@
-let canvas = document.getElementById('game-canvas'); //получаем canvas
-  canvas.width = 512;
-  canvas.height = 384;
-  canvas.style.width = '512px';
-  canvas.style.height = '384px';
-let colorsArr = document.querySelectorAll('.colorButton');
-let headBodySwitcher = document.querySelectorAll('.headOrBodyColor');
-let widthSelector = document.querySelectorAll('.fieldSizeBtn');
-console.log(headBodySwitcher);
-console.log(headBodySwitcher.keys);
-console.log(headBodySwitcher.values);
-console.log(typeof(headBodySwitcher));
-let score = document.getElementById('score'); //получаем текст для очков
-let record = document.getElementById('record'); //получаем текст для рекорда
-let context = canvas.getContext('2d');//определяем тип холста
-let scoreCount = 0; //подсчет очков
-let recordCount = 0; //счет рекорда
+const canvas = document.getElementById('game-canvas'), //получаем canvas
+  widthSelector = document.querySelectorAll('.fieldSizeBtn'), //получаем кнопки размера поля
+  headColor = document.querySelector('#headColor'), //получаем ползунок цвета головы
+  bodyColor = document.querySelector('#bodyColor'), //получаем ползунок цвета тела
+  headExample = document.querySelector('#head'), //получаем пример цвета головы
+  bodyExample = document.querySelector('#body'), //получаем пример цвета тела
+  score = document.getElementById('score'), //получаем текст для очков
+  record = document.getElementById('record'), //получаем текст для рекорда
+  context = canvas.getContext('2d'),//определяем тип холста
+  width = 512, //изначальная ширина поля
+  height = 384; //изначальная высота поля
+let scoreCount = 0, //счетчик очков
+  recordCount = 0, //счетчик рекорда
+  bonus;
+
+canvas.width = width;
+canvas.height = height;
+canvas.style.width = `${width}px`;
+canvas.style.height = `${height}px`;
 
 const fieldProperties = {
   step: 0,
@@ -23,8 +25,8 @@ const fieldProperties = {
 
 let snake = {
   sizeCell: 16, //размер одного куска змеи
-  x: 160,
-  y: 160,
+  x: 160,  //положение по x
+  y: 160,  //положение по y
   dirX: 0, //направление по x
   dirY: 0, //направление по y
   stepSize: 16, //один шаг в 'кадр'
@@ -35,16 +37,16 @@ let snake = {
 }
 
 let berry = {
-  x: 0,
-  y: 0,
-  avaliableSize: [8, 16],
+  x: 0, //положение по x
+  y: 0, //положение по y
+  avaliableSize: [8, 16], //массив возможных размеров
   sizeBerry: 8, //размер ягоды
 }
 
 const align = () => { return ((snake.sizeCell - berry.sizeBerry) / 2); }//значение выравнивания положения фрукта и коллизии змеи с ним
 let indent; //отступ
 
-const getRandomInt = (min, max) => {
+const getRandomInt = (min, max) => { //генератор чисел в заданом диапазоне
   return Math.floor(Math.random() * (max - min) + min);
 }
 
@@ -53,39 +55,30 @@ const gameLoop = () => {
 
   if (++fieldProperties.step < fieldProperties.maxStep) return;
   fieldProperties.step = 0;
-
+  //очистка канваса
   context.clearRect(0, 0, canvas.width, canvas.height);
-
+  //отрисовка
   drawSnake();
   drawBerry();
-  whatToPaint(getColor);
+  getColor();
   score.innerHTML = `Your current score is ${scoreCount}`;
   record.innerHTML = `Your record was ${recordCount}`;
 }
 requestAnimationFrame(gameLoop);
 
 const drawSnake = () => {
- 
   snake.x += snake.dirX;
   snake.y += snake.dirY;
   collisionBorder()
   snake.tails.unshift({ x: snake.x, y: snake.y });
   head = snake.tails[0];
-  if (snake.tails.length > snake.maxTails) {
-    snake.tails.pop();
-  }
+  if (snake.tails.length > snake.maxTails) snake.tails.pop();
   for (let cell of snake.tails) {
-    if (cell === head) {
-      context.fillStyle = snake.headColor;
-    }
-    else {
-      context.fillStyle = snake.bodyColor;
-    }
+    if (cell === head) context.fillStyle = snake.headColor;
+    else context.fillStyle = snake.bodyColor;
     context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
-
     if (cell.x + indent == berry.x && cell.y + indent == berry.y) {
-      let bonus;
-      if (berry.sizeBerry = berry.avaliableSize[0]) bonus = 1;
+      if (berry.sizeBerry === berry.avaliableSize[0]) bonus = 1;
       else bonus = 2;
       scoreCount+=bonus;
       if (scoreCount > recordCount) recordCount+=bonus;
@@ -118,26 +111,16 @@ const drawBerry = () => {
 const berryPos = () => {
   berry.sizeBerry = berry.avaliableSize[Math.round(Math.random())];
   indent = align();
-  console.log(indent);
   berry.x = (getRandomInt(0, canvas.width / snake.sizeCell) * snake.sizeCell) + indent;
   berry.y = getRandomInt(0, canvas.height / snake.sizeCell) * snake.sizeCell + indent;
 }
 berryPos();
 
 function collisionBorder() {
-  if (snake.x < 0) {
-    snake.x = canvas.width - snake.sizeCell;
-  }
-  else if (snake.x >= canvas.width) {
-    snake.x = 0;
-  }
-
-  if (snake.y < 0) {
-    snake.y = canvas.height - snake.sizeCell;
-  }
-  else if (snake.y >= canvas.height) {
-    snake.y = 0;
-  }
+  if (snake.x < 0) snake.x = canvas.width - snake.sizeCell;
+  else if (snake.x >= canvas.width) snake.x = 0;
+  if (snake.y < 0) snake.y = canvas.height - snake.sizeCell;
+  else if (snake.y >= canvas.height) snake.y = 0;
 }
 
 document.addEventListener("keydown", e => {
@@ -159,55 +142,34 @@ document.addEventListener("keydown", e => {
   }
 });
 
-let switcher;
-const whatToPaint = (callback) => {
-  for (let button of headBodySwitcher) {
-    button.onclick = () => {
-      button.style.color = 'red';
-      button.style.backgroundColor = 'lightgray';
-      if (button.id === 'head') {
-        switcher = 0;
-      }
-      else if (button.id === 'body') {
-        switcher = 1;
-      }
-      setTimeout(() => { button.style.color = 'black'; button.style.backgroundColor = 'floralwhite';}, 2000);
-    }
+const colors = ['blue', 'red', 'green', 'yellow', 'brown', 'purple', 'pink', 'orange'];
+headExample.style.backgroundColor = colors[0];
+bodyExample.style.backgroundColor = colors[0];
+const getColor = () => {
+  headColor.oninput = () => {
+    snake.headColor = colors[headColor.value];
+    headExample.style.backgroundColor = colors[headColor.value];
   }
-  callback(switcher);
-}
-
-const getColor = (num) => {
-  for (let currColor of colorsArr) {
-    if (num === 0) {
-      currColor.onclick = () => {
-        snake.headColor = currColor.style.backgroundColor;
-        console.log(snake.headColor + ' for head');
-      };
-    }
-    else {
-      currColor.onclick = () => {
-        snake.bodyColor = currColor.style.backgroundColor;
-        console.log(snake.bodyColor + ' for body');
-      };
-    }
+  bodyColor.oninput = () => {
+    snake.bodyColor = colors[bodyColor.value];
+    bodyExample.style.backgroundColor = colors[bodyColor.value];
   }
 }
 
 const getFieldWidth = () => {
   for (let elem of widthSelector) {
     elem.onclick = () => {
-      if (elem === widthSelector[0]) {
-        canvas.width = 512;
-        canvas.height = 384;
-        canvas.style.width = '512px';
-        canvas.style.height = '384px';
+      if (Array.from(widthSelector).indexOf(elem) === 0) {
+        canvas.width = width;
+        canvas.height = height;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
       }
       else {
-        context.canvas.width = 640;
-        context.canvas.height = 384;
-        canvas.style.width = '640px';
-        canvas.style.height = '384px';
+        canvas.width = width * 1.5;
+        canvas.height = height * 1.25;
+        canvas.style.width = `${width * 1.5}px`;
+        canvas.style.height = `${height * 1.25}px`;
       }
     }
   }

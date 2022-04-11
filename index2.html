@@ -24,24 +24,21 @@
             <div id="canvasWrapper">
                 <canvas id="game-canvas"></canvas>
                 <div id="dataField">
-                    <span style="font-weight: bold;" id="score" >Score</span>
-                    <span style="font-weight: bold;" id="record">Record</span>
-                    <span style="font-weight: bold;">Choose color of snake:</span>
+                    <span style="font-weight: bold; text-align:center; padding-bottom:5px;" id="score">Score</span>
+                    <span style="font-weight: bold; text-align:center; padding-bottom:10px;" id="record">Record</span>
+                    <span style="font-weight: bold; text-align:center;">Choose color of snake:</span>
+                    <div class="slidersWrapper">
+                        <span style="text-align:center">Head</span>
+                        <input type="range" min="0" max="7" value="0" class="slider" id="headColor">
+                        <div id="head" style="height:30px; width:30px" class="examples"></div>
+                        <span style="text-align:center">Body</span>
+                        <input type="range" min="0" max="7" value="0" class="slider" id="bodyColor">
+                        <div id="body" style="height:30px; width:30px" class="examples"></div>
+                    </div>
+                    <span style="position:relative; top:0; width: contain; text-align:center; font-weight:bold;">Size of game field:</span>
                     <div id="buttonWrapper">
-                        <button class="colorButton" style="background-color:red; height:60px; width: 80px;">Red</button>
-                        <button class="colorButton" style="background-color:yellow; height:60px; width: 80px;">Yellow</button>
-                        <button class="colorButton" style="background-color:blue; height:60px; width: 80px;">Blue</button>
-                        <button class="colorButton" style="background-color:pink; height:60px; width: 80px;">Pink</button>
-                        <button class="colorButton" style="background-color:gray; height:60px; width: 80px;">Gray</button>
-                        <button class="colorButton" style="background-color:green; height:60px; width: 80px;">Green</button>
-                        <button class="colorButton" style="background-color:purple; height:60px; width: 80px;">Purple</button>
-                        <button class="colorButton" style="background-color:brown; height:60px; width: 80px;">Brown</button>
-                        <button class="headOrBodyColor" id="head" style="background-color:floralwhite; height:60px; width: 80px;">Head</button>
-                        <button class="headOrBodyColor" id="body" style="background-color:floralwhite; height:60px; width: 80px;">Body</button>
-                        <button class="fieldSizeBtn" id="normal" style="background-color:lightgray; height:60px; width: 80px;">Normal</button>
-                        <button class="fieldSizeBtn" id="wide" style="background-color:lightgray; height:60px; width: 80px;">Wide</button>
-                        <span style="height:60px; width:165px; font-weight: bold;">⬆Part will be painted⬆</span>
-                        <span style="height:60px; width:165px; font-weight: bold; position:relative; left: 85px">⬆Size of game field⬆</span>
+                        <button class="fieldSizeBtn" id="normal">Normal</button>
+                        <button class="fieldSizeBtn" id="wide">Large</button>
                     </div>
                 </div>
             </div>

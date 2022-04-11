@@ -63,13 +63,13 @@ nav:hover { /*Раскрытый nav*/
   background-color: #3e8e41;
 }
 
-nav ul{ /*параметры целого списка nav*/
+nav ul{ /*Параметры целого списка nav*/
   opacity:0;
   padding:0;
   color:white;
 }
 
-nav:hover ul { /*параметры елемента списка в nav при открытии nav*/
+nav:hover ul { /*Параметры елемента списка в nav при открытии nav*/
   opacity: 1;
   display: flex;
   flex-direction: column;
@@ -79,7 +79,7 @@ nav:hover ul { /*параметры елемента списка в nav при 
   line-height: 250%;
 }
 
-nav li { /*параметры елемента списка в nav*/
+nav li { /*Параметры елемента списка в nav*/
   padding-bottom: 2%;
 }
 
@@ -87,7 +87,7 @@ nav li { /*параметры елемента списка в nav*/
   transition: all 1s ease-out;
 }
 
-nav button { /*кнопка (стандартные настройки, если изменять то через .класс .button)*/
+nav button { /*Кнопка (стандартные настройки, если изменять то через .класс .button)*/
   height: 100%;
   width: 100%;
   background-color: #4CAF50;
@@ -107,65 +107,94 @@ button a { /*тег ссылки покрывает почти всю площа
    line-height: 200%;
 }
 
-nav button:hover {/*наведение на кнопку*/
+nav button:hover {/*Наведение на кнопку*/
   background-color: #3e8e41;
 }
 
-nav:hover ~ main { /*смена размера основной части при раскрытии левой панели*/
+nav:hover ~ main { /*Смена размера основной части при раскрытии левой панели*/
   width: 80%;
   height: 90%;
   background-color: lightgray;
 }
-#canvasWrapper {
+#canvasWrapper { /*Обертка канваса и меню*/
   display:flex;
+  width:fit-content;
   flex-direction:column;
-  padding-left:0.25%;
-  padding-top:0.25%;
+  padding-left:0.5%;
+  padding-top:0.5%;
 }
 
-#buttonWrapper {
+#buttonWrapper { /*Обертка кнопок*/
   display: grid;
   position:relative;
-  grid-template-columns: repeat(4, 85px);
-  grid-template-rows: repeat(3, 65px);
+  grid-template-columns: 130px 130px;
+  padding-top:15px;
+  padding-bottom:15px;
 }
 
-#buttonWrapper > .fieldSizeBtn {
+#buttonWrapper > .fieldSizeBtn { /*Кнопки размера поля внутри обертки*/
   font-weight: bold;
   border:solid;
+  height:60px;
+  width: 100px;
   border-width: 2px;
   border-color: gray;
   border-radius: 20px;
   cursor: pointer;
+  margin:auto;
+  background-color: ghostwhite;
 }
 
-#buttonWrapper > .colorButton{
-  font-weight: bold;
-  border:solid;
-  border-width: 2px;
-  border-color: gray;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-#buttonWrapper > .headOrBodyColor{
-  font-weight: bold;
-  border:solid;
-  border-width: 2px;
-  border-color: gray;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-#score{}
-
-#dataField{
-  position:relative;
+#dataField{ /*Счет, рекорд, обертка кнопок и слайдеров*/
+  width:fit-content;
+  position:absolute;
+  right:0;
+  top: 0;
   display:flex;
   flex-direction:column;
+  padding-right:0.5%;
+  padding-top:0.5%;
 }
 
-#game-canvas {
+.slider {/*Свойства слайдера*/
+  -webkit-appearance: none;
+  width: 150px;
+  height: 10px;
+  border-radius:5px;
+  margin-top:15px;
+  margin-bottom:15px;
+  box-sizing: border-box;
+  background-color: ghostwhite;
+  border:solid 1px gray;
+}
+
+.slider::-webkit-slider-thumb {/*Точка слайдера*/
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: solid 1px gray;
+  border-radius:50%;
+  background-color: mediumseagreen;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.slidersWrapper {/*Обертка слайдера*/
+  width:fit-content;
+  display: grid;
+  align-items:center;
+  justify-content:center;
+  grid-template-columns: 55px 165px 40px;
+  grid-template-rows: 40px 40px;
+}
+
+.examples{/*Примеры цветов*/
+  margin:5px;
+  margin:5px;
+  box-sizing: border-box;
+}
+
+#game-canvas {/*Канвас*/
   border: solid;
   border-width: 2px;
   border-color: gray;
@@ -173,12 +202,12 @@ nav:hover ~ main { /*смена размера основной части пр�
   background-color : white;
 }
 
-a { /*убирает подчеркивание*/
+a { /*Убирает подчеркивание*/
   color: inherit;
   text-decoration: none;
 }
 
-h1, h2, h3, h4 { /*не будет отступов лишних*/
+h1, h2, h3, h4 { /*Не будет отступов лишних*/
   margin-top:0;
   margin-bottom:0;
 }
