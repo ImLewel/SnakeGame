@@ -18,6 +18,8 @@ header { /*Шапка*/
   height: 5%;
   background-color: darkgreen;
   color:white;
+  border-bottom: 1px black solid;
+  z-index: 3;
 }
 
 footer { /*Подвал*/
@@ -30,6 +32,8 @@ footer { /*Подвал*/
   height: 5%;
   background-color: darkgreen;
   color: white;
+  border-top: 1px black solid;
+  z-index: 3;
 }
 
 main { /*Основной блок*/
@@ -40,6 +44,7 @@ main { /*Основной блок*/
   width: 95%;
   height: 90%;
   background-color: lightgray;
+  border-left: 1px black solid;
 }
 
 nav { /*Скрытый nav*/
@@ -48,7 +53,8 @@ nav { /*Скрытый nav*/
   top:5%;
   width: 5%;
   height: 90%;
-  background-color: forestgreen; 
+  background-color: forestgreen;
+  border-right: 1px black solid;
 }
 
 nav:hover { /*Раскрытый nav*/
@@ -113,12 +119,24 @@ nav:hover ~ main { /*смена размера основной части пр�
 #canvasWrapper {
   display:flex;
   flex-direction:column;
+  padding-left:0.25%;
+  padding-top:0.25%;
 }
 
 #buttonWrapper {
   display: grid;
+  position:relative;
   grid-template-columns: repeat(4, 85px);
   grid-template-rows: repeat(3, 65px);
+}
+
+#buttonWrapper > .fieldSizeBtn {
+  font-weight: bold;
+  border:solid;
+  border-width: 2px;
+  border-color: gray;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 #buttonWrapper > .colorButton{
@@ -142,13 +160,12 @@ nav:hover ~ main { /*смена размера основной части пр�
 #score{}
 
 #dataField{
+  position:relative;
   display:flex;
   flex-direction:column;
 }
 
 #game-canvas {
-  width:384px;
-  height:384px;
   border: solid;
   border-width: 2px;
   border-color: gray;

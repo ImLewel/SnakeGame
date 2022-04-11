@@ -1,6 +1,11 @@
 let canvas = document.getElementById('game-canvas'); //получаем canvas
+  canvas.width = 512;
+  canvas.height = 384;
+  canvas.style.width = '512px';
+  canvas.style.height = '384px';
 let colorsArr = document.querySelectorAll('.colorButton');
 let headBodySwitcher = document.querySelectorAll('.headOrBodyColor');
+let widthSelector = document.querySelectorAll('.fieldSizeBtn');
 console.log(headBodySwitcher);
 console.log(headBodySwitcher.keys);
 console.log(headBodySwitcher.values);
@@ -26,16 +31,18 @@ let snake = {
   tails: [], //массив кусков змеи
   maxTails: 20, //текущее число кусков
   headColor: "blue",
-  bodyColor: "blue",
+  bodyColor: "midnightblue",
 }
 
 let berry = {
   x: 0,
   y: 0,
-  sizeBerry: 4, //размер €годы
+  avaliableSize: [8, 16],
+  sizeBerry: 8, //размер €годы
 }
 
-const align = (snake.sizeCell - berry.sizeBerry) / 2; //выравнивает положение фрукта и коллизию змеи с ним
+const align = () => { return ((snake.sizeCell - berry.sizeBerry) / 2); }//значение выравнивани€ положени€ фрукта и коллизии змеи с ним
+let indent; //отступ
 
 const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
@@ -76,14 +83,19 @@ const drawSnake = () => {
     }
     context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
 
-    if (cell.x + align == berry.x && cell.y + align == berry.y) {
+    if (cell.x + indent == berry.x && cell.y + indent == berry.y) {
+      let bonus;
+      if (berry.sizeBerry = berry.avaliableSize[0]) bonus = 1;
+      else bonus = 2;
+      scoreCount+=bonus;
+      if (scoreCount > recordCount) recordCount+=bonus;
+      snake.maxTails+=bonus;
       berryPos();
-      scoreCount++;
-      if (scoreCount > recordCount) recordCount++;
-      snake.maxTails++;
     }
-    if (snake.dirX < 0 && head.x - 16 === cell.x && head.y === cell.y || snake.dirX > 0 && head.x + 16 === cell.x && head.y === cell.y) refreshGame();
-    else if (snake.dirY < 0 && head.y - 16 === cell.y && head.x === cell.x || snake.dirY > 0 && head.y + 16 === cell.y && head.x === cell.x) refreshGame();
+         if (snake.dirX < 0 && head.x - 16 === cell.x && head.y === cell.y) refreshGame();
+    else if (snake.dirX > 0 && head.x + 16 === cell.x && head.y === cell.y) refreshGame();
+    else if (snake.dirY < 0 && head.y - 16 === cell.y && head.x === cell.x) refreshGame();
+    else if (snake.dirY > 0 && head.y + 16 === cell.y && head.x === cell.x) refreshGame();
   }
 }
 
@@ -104,8 +116,11 @@ const drawBerry = () => {
 }
 
 const berryPos = () => {
-  berry.x = (getRandomInt(0, canvas.width / snake.sizeCell) * snake.sizeCell) + align;
-  berry.y = getRandomInt(0, canvas.height / snake.sizeCell) * snake.sizeCell + align;
+  berry.sizeBerry = berry.avaliableSize[Math.round(Math.random())];
+  indent = align();
+  console.log(indent);
+  berry.x = (getRandomInt(0, canvas.width / snake.sizeCell) * snake.sizeCell) + indent;
+  berry.y = getRandomInt(0, canvas.height / snake.sizeCell) * snake.sizeCell + indent;
 }
 berryPos();
 
@@ -178,3 +193,23 @@ const getColor = (num) => {
     }
   }
 }
+
+const getFieldWidth = () => {
+  for (let elem of widthSelector) {
+    elem.onclick = () => {
+      if (elem === widthSelector[0]) {
+        canvas.width = 512;
+        canvas.height = 384;
+        canvas.style.width = '512px';
+        canvas.style.height = '384px';
+      }
+      else {
+        context.canvas.width = 640;
+        context.canvas.height = 384;
+        canvas.style.width = '640px';
+        canvas.style.height = '384px';
+      }
+    }
+  }
+}
+getFieldWidth();

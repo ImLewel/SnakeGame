@@ -22,7 +22,7 @@
         </nav>
         <main class="transition">
             <div id="canvasWrapper">
-                <canvas id="game-canvas" width="384" height="384"></canvas>
+                <canvas id="game-canvas"></canvas>
                 <div id="dataField">
                     <span style="font-weight: bold;" id="score" >Score</span>
                     <span style="font-weight: bold;" id="record">Record</span>
@@ -38,6 +38,10 @@
                         <button class="colorButton" style="background-color:brown; height:60px; width: 80px;">Brown</button>
                         <button class="headOrBodyColor" id="head" style="background-color:floralwhite; height:60px; width: 80px;">Head</button>
                         <button class="headOrBodyColor" id="body" style="background-color:floralwhite; height:60px; width: 80px;">Body</button>
+                        <button class="fieldSizeBtn" id="normal" style="background-color:lightgray; height:60px; width: 80px;">Normal</button>
+                        <button class="fieldSizeBtn" id="wide" style="background-color:lightgray; height:60px; width: 80px;">Wide</button>
+                        <span style="height:60px; width:165px; font-weight: bold;">⬆Part will be painted⬆</span>
+                        <span style="height:60px; width:165px; font-weight: bold; position:relative; left: 85px">⬆Size of game field⬆</span>
                     </div>
                 </div>
             </div>
