@@ -149,10 +149,10 @@ document.addEventListener("keydown", e => {
 
 //fixes moving in tail and refresGame bug
 const movingTailCollision = () => {
-  if(snake.tails[1].x == snake.x + snake.dirX){
+  if (snake.tails[1].x == snake.x + snake.dirX) {
     snake.dirX = movingTailCollision.dirX;
   }
-  if(snake.tails[1].y == snake.y + snake.dirY){
+  if (snake.tails[1].y == snake.y + snake.dirY) {
     snake.dirY = movingTailCollision.dirY;
   }
 }
