@@ -1,16 +1,16 @@
-const canvas = document.getElementById('game-canvas'), //получаем canvas
-  widthSelector = document.querySelectorAll('.fieldSizeBtn'), //получаем кнопки размера поля
-  headColor = document.querySelector('#headColor'), //получаем ползунок цвета головы
-  bodyColor = document.querySelector('#bodyColor'), //получаем ползунок цвета тела
-  headExample = document.querySelector('#head'), //получаем пример цвета головы
-  bodyExample = document.querySelector('#body'), //получаем пример цвета тела
-  score = document.getElementById('score'), //получаем текст для очков
-  record = document.getElementById('record'), //получаем текст для рекорда
-  context = canvas.getContext('2d'),//определяем тип холста
-  width = 512, //изначальная ширина поля
-  height = 384; //изначальная высота поля
-let scoreCount = 0, //счетчик очков
-  recordCount = 0, //счетчик рекорда
+const canvas = document.getElementById('game-canvas'), //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ canvas
+  widthSelector = document.querySelectorAll('.fieldSizeBtn'), //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+  headColor = document.querySelector('#headColor'), //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  bodyColor = document.querySelector('#bodyColor'), //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+  headExample = document.querySelector('#head'), //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  bodyExample = document.querySelector('#body'), //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+  score = document.getElementById('score'), //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  record = document.getElementById('record'), //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  context = canvas.getContext('2d'),//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+  width = 512, //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+  height = 384; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+let scoreCount = 0, //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  recordCount = 0, //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   bonus;
 
 canvas.width = width;
@@ -20,33 +20,33 @@ canvas.style.height = `${height}px`;
 
 const fieldProperties = {
   step: 0,
-  maxStep: 10, //фпс
+  maxStep: 10, //пїЅпїЅпїЅ
 }
 
 let snake = {
-  sizeCell: 16, //размер одного куска змеи
-  x: 160,  //положение по x
-  y: 160,  //положение по y
-  dirX: 0, //направление по x
-  dirY: 0, //направление по y
-  stepSize: 16, //один шаг в 'кадр'
-  tails: [], //массив кусков змеи
-  maxTails: 20, //текущее число кусков
+  sizeCell: 16, //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+  x: 160,  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ x
+  y: 160,  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ y
+  dirX: 0, //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ x
+  dirY: 0, //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ y
+  stepSize: 16, //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ 'пїЅпїЅпїЅпїЅ'
+  tails: [], //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+  maxTails: 20, //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
   headColor: "blue",
   bodyColor: "midnightblue",
 }
 
 let berry = {
-  x: 0, //положение по x
-  y: 0, //положение по y
-  avaliableSize: [8, 16], //массив возможных размеров
-  sizeBerry: 8, //размер ягоды
+  x: 0, //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ x
+  y: 0, //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ y
+  avaliableSize: [8, 16], //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+  sizeBerry: 8, //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 }
 
-const align = () => { return ((snake.sizeCell - berry.sizeBerry) / 2); }//значение выравнивания положения фрукта и коллизии змеи с ним
-let indent; //отступ
+const align = () => { return ((snake.sizeCell - berry.sizeBerry) / 2); }//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ
+let indent; //пїЅпїЅпїЅпїЅпїЅпїЅ
 
-const getRandomInt = (min, max) => { //генератор чисел в заданом диапазоне
+const getRandomInt = (min, max) => { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   return Math.floor(Math.random() * (max - min) + min);
 }
 
@@ -55,9 +55,9 @@ const gameLoop = () => {
 
   if (++fieldProperties.step < fieldProperties.maxStep) return;
   fieldProperties.step = 0;
-  //очистка канваса
+  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   context.clearRect(0, 0, canvas.width, canvas.height);
-  //отрисовка
+  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   drawSnake();
   drawBerry();
   getColor();
@@ -77,6 +77,7 @@ const drawSnake = () => {
     if (cell === head) context.fillStyle = snake.headColor;
     else context.fillStyle = snake.bodyColor;
     context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
+    //check and reacting for eating berry when moving
     if (cell.x + indent == berry.x && cell.y + indent == berry.y) {
       if (berry.sizeBerry === berry.avaliableSize[0]) bonus = 1;
       else bonus = 2;
@@ -85,6 +86,7 @@ const drawSnake = () => {
       snake.maxTails+=bonus;
       berryPos();
     }
+    //check for presence of tail cell when moving
          if (snake.dirX < 0 && head.x - 16 === cell.x && head.y === cell.y) refreshGame();
     else if (snake.dirX > 0 && head.x + 16 === cell.x && head.y === cell.y) refreshGame();
     else if (snake.dirY < 0 && head.y - 16 === cell.y && head.x === cell.x) refreshGame();
@@ -124,6 +126,8 @@ function collisionBorder() {
 }
 
 document.addEventListener("keydown", e => {
+  movingTailCollision.dirX = snake.dirX; //saving dir before change
+  movingTailCollision.dirY = snake.dirY; // ^^^^^^^^^^^^^^^^^^^^^^^
   if (e.code == "KeyW") {
     snake.dirX = 0;
     snake.dirY = -snake.stepSize;
@@ -140,19 +144,30 @@ document.addEventListener("keydown", e => {
     snake.dirY = 0;
     snake.dirX = snake.stepSize;
   }
+  movingTailCollision();
 });
 
-const colors = ['blue', 'red', 'green', 'yellow', 'brown', 'purple', 'pink', 'orange'];
-headExample.style.backgroundColor = colors[0];
-bodyExample.style.backgroundColor = colors[0];
+//fixes moving in tail and refresGame bug
+const movingTailCollision = () => {
+  if (snake.tails[1].x == snake.x + snake.dirX) {
+    snake.dirX = movingTailCollision.dirX;
+  }
+  if (snake.tails[1].y == snake.y + snake.dirY) {
+    snake.dirY = movingTailCollision.dirY;
+  }
+}
+
+const snakeColors = ['blue', 'red', 'green', 'yellow', 'brown', 'purple', 'pink', 'orange'];
+headExample.style.backgroundColor = snakeColors[0];
+bodyExample.style.backgroundColor = snakeColors[0];
 const getColor = () => {
   headColor.oninput = () => {
-    snake.headColor = colors[headColor.value];
-    headExample.style.backgroundColor = colors[headColor.value];
+    snake.headColor = snakeColors[headColor.value];
+    headExample.style.backgroundColor = snakeColors[headColor.value];
   }
   bodyColor.oninput = () => {
-    snake.bodyColor = colors[bodyColor.value];
-    bodyExample.style.backgroundColor = colors[bodyColor.value];
+    snake.bodyColor = snakeColors[bodyColor.value];
+    bodyExample.style.backgroundColor = snakeColors[bodyColor.value];
   }
 }
 
