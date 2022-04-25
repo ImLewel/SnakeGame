@@ -5,16 +5,29 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9EBEE59F-C0BF-453D-992F-2DE7D07E0E20}"
 	ProjectSection(SolutionItems) = preProject
-		app.js = app.js
-		index.html = index.html
-		index2.html = index2.html
 		server.js = server.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "site1", "site1", "{E85B4698-BA50-4E08-8BD0-0EA2BC608615}"
+	ProjectSection(SolutionItems) = preProject
+		index.html = index.html
+		style.css = style.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "site2", "site2", "{1161AB07-12AA-4BAD-996B-95A7A6078EAB}"
+	ProjectSection(SolutionItems) = preProject
+		app.js = app.js
+		index2.html = index2.html
 		style.css = style.css
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E85B4698-BA50-4E08-8BD0-0EA2BC608615} = {9EBEE59F-C0BF-453D-992F-2DE7D07E0E20}
+		{1161AB07-12AA-4BAD-996B-95A7A6078EAB} = {9EBEE59F-C0BF-453D-992F-2DE7D07E0E20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E637518D-7F5D-4B77-9283-6EAFD6ED13FD}
