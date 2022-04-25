@@ -1,16 +1,16 @@
-const canvas = document.getElementById('game-canvas'), //�������� canvas
-  widthSelector = document.querySelectorAll('.fieldSizeBtn'), //�������� ������ ������� ����
-  headColor = document.querySelector('#headColor'), //�������� �������� ����� ������
-  bodyColor = document.querySelector('#bodyColor'), //�������� �������� ����� ����
-  headExample = document.querySelector('#head'), //�������� ������ ����� ������
-  bodyExample = document.querySelector('#body'), //�������� ������ ����� ����
-  score = document.getElementById('score'), //�������� ����� ��� �����
-  record = document.getElementById('record'), //�������� ����� ��� �������
-  context = canvas.getContext('2d'),//���������� ��� ������
-  width = 512, //����������� ������ ����
-  height = 384; //����������� ������ ����
-let scoreCount = 0, //������� �����
-  recordCount = 0, //������� �������
+const canvas = document.getElementById('game-canvas'),
+  widthSelector = document.querySelectorAll('.fieldSizeBtn'),
+  headColor = document.querySelector('#headColor'),
+  bodyColor = document.querySelector('#bodyColor'),
+  headExample = document.querySelector('#head'),
+  bodyExample = document.querySelector('#body'),
+  score = document.getElementById('score'),
+  record = document.getElementById('record'),
+  context = canvas.getContext('2d'),
+  width = 512,
+  height = 384;
+let scoreCount = 0,
+  recordCount = 0,
   bonus;
 
 canvas.width = width;
@@ -20,33 +20,33 @@ canvas.style.height = `${height}px`;
 
 const fieldProperties = {
   step: 0,
-  maxStep: 10, //���
+  maxStep: 10,
 }
 
 let snake = {
-  sizeCell: 16, //������ ������ ����� ����
-  x: 160,  //��������� �� x
-  y: 160,  //��������� �� y
-  dirX: 0, //����������� �� x
-  dirY: 0, //����������� �� y
-  stepSize: 16, //���� ��� � '����'
-  tails: [], //������ ������ ����
-  maxTails: 20, //������� ����� ������
+  sizeCell: 16,
+  x: 160,
+  y: 160,
+  dirX: 0,
+  dirY: 0,
+  stepSize: 16,
+  tails: [],
+  maxTails: 20,
   headColor: "blue",
   bodyColor: "midnightblue",
 }
 
 let berry = {
-  x: 0, //��������� �� x
-  y: 0, //��������� �� y
-  avaliableSize: [8, 16], //������ ��������� ��������
-  sizeBerry: 8, //������ �����
+  x: 0,
+  y: 0,
+  avaliableSize: [8, 16],
+  sizeBerry: 8,
 }
 
-const align = () => { return ((snake.sizeCell - berry.sizeBerry) / 2); }//�������� ������������ ��������� ������ � �������� ���� � ���
-let indent; //������
+const align = () => { return ((snake.sizeCell - berry.sizeBerry) / 2); }
+let indent;
 
-const getRandomInt = (min, max) => { //��������� ����� � ������� ���������
+const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
@@ -55,9 +55,7 @@ const gameLoop = () => {
 
   if (++fieldProperties.step < fieldProperties.maxStep) return;
   fieldProperties.step = 0;
-  //������� �������
   context.clearRect(0, 0, canvas.width, canvas.height);
-  //���������
   drawSnake();
   drawBerry();
   getColor();
@@ -77,7 +75,6 @@ const drawSnake = () => {
     if (cell === head) context.fillStyle = snake.headColor;
     else context.fillStyle = snake.bodyColor;
     context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
-    //check and reacting for eating berry when moving
     if (cell.x + indent == berry.x && cell.y + indent == berry.y) {
       if (berry.sizeBerry === berry.avaliableSize[0]) bonus = 1;
       else bonus = 2;
@@ -86,7 +83,6 @@ const drawSnake = () => {
       snake.maxTails+=bonus;
       berryPos();
     }
-    //check for presence of tail cell when moving
          if (snake.dirX < 0 && head.x - 16 === cell.x && head.y === cell.y) refreshGame();
     else if (snake.dirX > 0 && head.x + 16 === cell.x && head.y === cell.y) refreshGame();
     else if (snake.dirY < 0 && head.y - 16 === cell.y && head.x === cell.x) refreshGame();
@@ -126,8 +122,8 @@ function collisionBorder() {
 }
 
 document.addEventListener("keydown", e => {
-  movingTailCollision.dirX = snake.dirX; //saving dir before change
-  movingTailCollision.dirY = snake.dirY; // ^^^^^^^^^^^^^^^^^^^^^^^
+  movingTailCollision.dirX = snake.dirX;
+  movingTailCollision.dirY = snake.dirY;
   if (e.code == "KeyW") {
     snake.dirX = 0;
     snake.dirY = -snake.stepSize;
@@ -147,7 +143,6 @@ document.addEventListener("keydown", e => {
   movingTailCollision();
 });
 
-//fixes moving in tail and refresGame bug
 const movingTailCollision = () => {
   if (snake.tails[1].x == snake.x + snake.dirX) {
     snake.dirX = movingTailCollision.dirX;
